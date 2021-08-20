@@ -1,1 +1,0 @@
-# MSMGC_Equipo5
