@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ChangeColor : MonoBehaviour
+public class ChangeColorThird : MonoBehaviour
 {
     public SpriteRenderer square;
     Coroutine the_routine;
@@ -39,9 +38,9 @@ public class ChangeColor : MonoBehaviour
         square.color = Color.green;
     }
     public IEnumerator ChangeColorToGreen(){
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(20f);
         square.color = Color.green;
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(2f);
         square.color = Color.red;
     }
 
