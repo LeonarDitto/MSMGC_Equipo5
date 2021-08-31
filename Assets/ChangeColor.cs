@@ -14,7 +14,6 @@ public class ChangeColor : MonoBehaviour
     {
         transform.position = start.position;
         square.color = Color.red;
-        //StartCoroutine("ChangeColorToGreen");
         
     }
 
@@ -26,18 +25,9 @@ public class ChangeColor : MonoBehaviour
         }
         if (square){
                 StartCoroutine("ChangeColorToGreen");
-                // if (square.color == Color.red){
-                //     StopCoroutine("ChangeColorToGreen");
-
-                // }
-                
 
         }
-        // StartCoroutine(ChangeColorToRed());
-     
-        // InvokeRepeating ("newColor", 10, 8);
-        // square.color = Color.red;
-    
+       
     }
     void newColor(){
         square.color = Color.green;

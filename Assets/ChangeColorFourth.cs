@@ -13,7 +13,6 @@ public class ChangeColorFourth : MonoBehaviour
     {
         transform.position = start.position;
         square.color = Color.red;
-        StartCoroutine("ChangeColorToGreen");
         
     }
 
@@ -23,25 +22,26 @@ public class ChangeColorFourth : MonoBehaviour
         if (square.color == Color.green){
             transform.position = Vector2.Lerp(transform.position, end.position, Time.deltaTime);
         }
-        //the_routine = StartCoroutine("ChangeColorToRed");
-        //StartCoroutine("ChangeColorToGreen");
-        //StopCoroutine(the_routine);
-     
+        if (square){
+                StartCoroutine("ChangeColorToGreen");
+                
+        }
  
     
     }
 
-    public IEnumerator ChangeColorToRed(){
+     IEnumerator ChangeColorToRed(){
         yield return new WaitForSeconds(5f);
         square.color = Color.red;
         yield return new WaitForSeconds(10f);
         square.color = Color.green;
     }
-    public IEnumerator ChangeColorToGreen(){
-        yield return new WaitForSeconds(22f);
+    IEnumerator ChangeColorToGreen(){
+        yield return new WaitForSecondsRealtime(22.0f);
         square.color = Color.green;
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSecondsRealtime(8.0f);
         square.color = Color.red;
+        StartCoroutine("ChangeColorToGreen");
     }
 
     private void OnDrawGizmos(){
