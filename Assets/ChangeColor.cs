@@ -9,6 +9,7 @@ public class ChangeColor : MonoBehaviour
     Coroutine the_routine;
     [SerializeField] private Transform start;
     [SerializeField] private Transform end;
+    float endPost = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +21,25 @@ public class ChangeColor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        endPost = end.position.y;
         if (square.color == Color.green){
             transform.position = Vector2.Lerp(transform.position, end.position, Time.deltaTime);
+            //Debug.Log(transform.position.y);
+            //Debug.Log("End: " + endPost);
+            if (transform.position.y + 0.2 >= endPost){
+                Debug.Log("Hola");
+                transform.position = start.position;
+
+            }
+            
+            
         }
+
+        
+        //Debug.Log("End " + transform.position);
+        //Debug.Log(transform.position);
+        
+
         if (square){
                 StartCoroutine("ChangeColorToGreen");
 
@@ -49,5 +66,8 @@ public class ChangeColor : MonoBehaviour
     private void OnDrawGizmos(){
         Gizmos.DrawCube(start.position, Vector3.one*0.1f);
         Gizmos.DrawCube(end.position, Vector3.one*0.1f);
+        
+        //Destroy(this);
+        //transform.position = start.position;
     }
 }
