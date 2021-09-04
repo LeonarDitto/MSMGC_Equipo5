@@ -8,6 +8,8 @@ public class ChangeColorFourth : MonoBehaviour
     Coroutine the_routine;
     [SerializeField] private Transform start;
     [SerializeField] private Transform end;
+    float endPost = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +21,22 @@ public class ChangeColorFourth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        endPost = end.position.x;
         if (square.color == Color.green){
             transform.position = Vector2.Lerp(transform.position, end.position, Time.deltaTime);
         }
+
+        if (square.color == Color.red && transform.position.x > -2.0){
+                transform.position = start.position;
+
+            }
+
+        if (transform.position.x + 0.2 >= endPost){
+                //Debug.Log("Hola");
+                transform.position = start.position;
+
+        }
+
         if (square){
                 StartCoroutine("ChangeColorToGreen");
                 

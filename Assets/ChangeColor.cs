@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ChangeColor : MonoBehaviour
 {
     public SpriteRenderer square;
+    public Transform distance;
     Coroutine the_routine;
     [SerializeField] private Transform start;
     [SerializeField] private Transform end;
@@ -21,21 +22,23 @@ public class ChangeColor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         endPost = end.position.y;
-        if (square.color == Color.green){
+        if (square.color == Color.green ){
             transform.position = Vector2.Lerp(transform.position, end.position, Time.deltaTime);
-            //Debug.Log(transform.position.y);
-            //Debug.Log("End: " + endPost);
-            if (transform.position.y + 0.2 >= endPost){
-                Debug.Log("Hola");
-                transform.position = start.position;
-
-            }
             
             
         }
+        if (square.color == Color.red && transform.position.y > -1.7){
+                transform.position = start.position;
 
-        
+            }
+
+        if (transform.position.y + 0.2 >= endPost){
+                //Debug.Log("Hola");
+                transform.position = start.position;
+
+        }
         //Debug.Log("End " + transform.position);
         //Debug.Log(transform.position);
         
