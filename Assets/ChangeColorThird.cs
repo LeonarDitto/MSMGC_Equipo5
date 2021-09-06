@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ChangeColorThird : MonoBehaviour
 {
+    public SpriteRenderer actualCar;
+    public List<Sprite> newCars;
     //Semaforo
     public SpriteRenderer square;
-    //No necesario, se va a eliminar en un futuro.
-    Coroutine the_routine;
+    
     //Punto de inicio del auto
     [SerializeField] private Transform start;
     //Punto final del auto
     [SerializeField] private Transform end;
     float endPost = 0;
+    private float timer = 0.0f;
     
     void Start()
     {
@@ -25,6 +27,7 @@ public class ChangeColorThird : MonoBehaviour
     
     void Update()
     {
+        timer += Time.deltaTime;
         endPost = end.position.y;
         //Mueve el auto si esta en verde
         if (square.color == Color.green){
@@ -33,39 +36,39 @@ public class ChangeColorThird : MonoBehaviour
 
         //Si esta adelante del semaforo en rojo, regresa a la posicion inicial
         if (square.color == Color.red && transform.position.y < 1.5){
-                transform.position = start.position;
+            actualCar.sprite = newCars[Random.Range(0, 4)];
+            transform.position = start.position;
 
             }
 
         //Si llega al final del mapa, regresa al punto de inicio
 
         if (transform.position.y + 0.2 <= endPost){
-                //Debug.Log("Hola");
-                transform.position = start.position;
+            actualCar.sprite = newCars[Random.Range(0, 4)];
+            transform.position = start.position;
 
         }
 
-        if (square){
-                StartCoroutine("ChangeColorToGreen");
-
+        if (timer >= 21.0f){
+            timer = 0;
         }
+
+        
+        newColor();
       
     
     }
 
-    public IEnumerator ChangeColorToRed(){
-        yield return new WaitForSeconds(5f);
-        square.color = Color.red;
-        yield return new WaitForSeconds(10f);
-        square.color = Color.green;
+    void newColor(){
+        if (timer >= 10.0f && timer < 12.0f){
+            square.color = Color.green;
+        }
+        if (timer >= 12.0f){
+            square.color = Color.red;
+        }
+        
     }
-    IEnumerator ChangeColorToGreen(){
-        yield return new WaitForSecondsRealtime(20.0f);
-        square.color = Color.green;
-        yield return new WaitForSecondsRealtime(2.0f);
-        square.color = Color.red;
-        StartCoroutine("ChangeColorToGreen");
-    }
+
 
     private void OnDrawGizmos(){
         Gizmos.DrawCube(start.position, Vector3.one*0.1f);
