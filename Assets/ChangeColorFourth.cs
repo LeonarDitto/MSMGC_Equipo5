@@ -4,33 +4,39 @@ using UnityEngine;
 
 public class ChangeColorFourth : MonoBehaviour
 {
+    //Semaforo
     public SpriteRenderer square;
+    //No necesario, se va a eliminar en un futuro.
     Coroutine the_routine;
+    //Punto de inicio del auto
     [SerializeField] private Transform start;
+    //Punto final del auto
     [SerializeField] private Transform end;
     float endPost = 0;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         transform.position = start.position;
+        //Todos los semaforos inician en rojo
         square.color = Color.red;
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         endPost = end.position.x;
+        //Mueve el auto si esta en verde
         if (square.color == Color.green){
             transform.position = Vector2.Lerp(transform.position, end.position, Time.deltaTime);
         }
-
+        //Si esta adelante del semaforo en rojo, regresa a la posicion inicial
         if (square.color == Color.red && transform.position.x > -2.0){
                 transform.position = start.position;
 
             }
-
+        //Si llega al final del mapa, regresa al punto de inicio
         if (transform.position.x + 0.2 >= endPost){
                 //Debug.Log("Hola");
                 transform.position = start.position;
